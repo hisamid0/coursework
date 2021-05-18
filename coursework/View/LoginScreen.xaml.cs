@@ -10,23 +10,23 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
-using SharpPcap;
-using SharpPcap.LibPcap;
-using SharpPcap.Statistics;
-namespace CourseWork
+
+namespace CourseWork.View
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Логика взаимодействия для LoginScreen.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class LoginScreen : Window
     {
-        public MainWindow()
+        public LoginScreen()
         {
             InitializeComponent();
         }
 
-
+        private void btnSubmit_Click(object sender, RoutedEventArgs e)
+        {
+            
+        }
     }
 }

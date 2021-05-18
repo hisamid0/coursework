@@ -1,0 +1,22 @@
+﻿<Window x:Class="CourseWork.View.LoginScreen"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CourseWork.View"
+        mc:Ignorable="d"
+        Title="Login" Height="300" Width="300" Background="DarkBlue">
+    <Border Background="DarkSlateGray" CornerRadius="20" Margin="20">
+        <StackPanel Margin="20">
+            <Label Content="Логин" Foreground="White" FontSize="25" HorizontalAlignment="Center" ></Label>
+            <Separator/>
+            <Label Content="Имя пользователя" Foreground="White"/>
+            <TextBox x:Name="txtUserName" Background="#545d6a" Foreground="White" FontSize="18"/>
+            <Label Content="Пароль" Foreground="White"/>
+            <PasswordBox x:Name="txtPassword" Background="#545d6a" Foreground="White" FontSize="18"/>
+            <Separator/>
+            <Button x:Name="btnSubmit" Content="Войти" Background="#545d6a" Foreground="White" FontSize="18" Click="btnSubmit_Click"/>
+
+        </StackPanel>
+    </Border>
+</Window>
