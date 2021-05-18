@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net5.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.6" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="PacketDotNet">
+      <HintPath>..\..\..\..\.nuget\packages\packetdotnet\1.2.0\lib\netstandard2.0\PacketDotNet.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpPcap">
+      <HintPath>..\..\sharppcap\SharpPcap\bin\Debug\netstandard2.0\SharpPcap.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>
