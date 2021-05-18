@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CourseWork.View"
         mc:Ignorable="d"
-        Title="" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="800">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -16,6 +16,14 @@
                 <TabItem.Header>
                     <TextBlock Text="Информация о пакете"></TextBlock>
                 </TabItem.Header>
+                <ListView>
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="Колонка одын"/>
+                            <GridViewColumn Header="Колонка дыва"/>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
             </TabItem>
         </TabControl>
 
