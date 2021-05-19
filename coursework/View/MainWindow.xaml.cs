@@ -25,6 +25,7 @@ namespace CourseWork.View
         public MainWindow()
         {
             InitializeComponent();
+            
         }
 
 

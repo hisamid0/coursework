@@ -17,7 +17,7 @@ namespace CourseWork.Model.Data
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            
+            optionsBuilder.UseSqlServer("Server=localhost\\SQLEXPRESS;Database=courseworkdatabase;Trusted_Connection=True;");
         }
     }
 }

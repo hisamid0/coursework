@@ -11,5 +11,6 @@ namespace CourseWork.Model
         public int Id { get; set; }
         public string IpAddress { get; set; }
         public string Something { get; set; }
+        public DateTime Date { get; set; }
     }
 }
