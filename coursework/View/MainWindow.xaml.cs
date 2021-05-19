@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using CourseWork.ViewModel;
 using SharpPcap;
 using SharpPcap.LibPcap;
 using SharpPcap.Statistics;
@@ -25,7 +26,7 @@ namespace CourseWork.View
         public MainWindow()
         {
             InitializeComponent();
-            
+            DataContext = new PackageManage();
         }
 
 

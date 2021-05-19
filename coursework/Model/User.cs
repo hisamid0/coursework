@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace CourseWork.Model
 {
-    class User
+    public class User
     {
         public int Id { get; set; }
         public string Name { get; set; }
         public string Password { get; set; }
-
+        public List<User> Users { get; set; }  
 
     }
 }
