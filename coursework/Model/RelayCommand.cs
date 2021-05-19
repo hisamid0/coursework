@@ -5,8 +5,8 @@ namespace ManageStaffDBApp.Model
 {
     public class RelayCommand : ICommand
     {
-        private static Action<object> _execute;
-        private static Func<object, bool> _canExecute;
+        private Action<object> _execute;
+        private Func<object, bool> _canExecute;
         public event EventHandler CanExecuteChanged
         {
             add { CommandManager.RequerySuggested += value; }

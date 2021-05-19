@@ -7,7 +7,7 @@ using CourseWork.Model;
 using CourseWork.View;
 using System.ComponentModel;
 using System.Windows;
-
+using ManageStaffDBApp.Model;
 
 namespace CourseWork.ViewModel
 {
@@ -36,7 +36,7 @@ namespace CourseWork.ViewModel
         }
 
         //Команды открытия окон 
-
+        // TO DO ПОНЯТЬ ПОЧЕМУ НЕ МОГУ ИСПОЛЬЗОВАТЬ RELAYCOMMAND ТУТА
 
         // Метод открытия окон
         private void OpenInterfaceSelectionWindow()
