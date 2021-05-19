@@ -26,6 +26,6 @@
                 </ListView>
             </TabItem>
         </TabControl>
-
+        <Button Grid.Row="1" Width="150" HorizontalAlignment="Right" Content="Выбрать интерфейс"/>
     </Grid>
 </Window>
