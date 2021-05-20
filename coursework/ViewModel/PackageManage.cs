@@ -37,9 +37,21 @@ namespace CourseWork.ViewModel
 
         //Команды открытия окон 
         // TO DO ПОНЯТЬ ПОЧЕМУ НЕ МОГУ ИСПОЛЬЗОВАТЬ RELAYCOMMAND ТУТА
-
+        private RelayCommand openInterfaceSelectionWindow;
+        public RelayCommand OpenInterfaceSelectionWindow
+        {
+            get
+            {
+                return openInterfaceSelectionWindow ?? new RelayCommand(obj =>
+                {
+                    OpenInterfaceSelectionWindowMethod();
+                }
+                );
+            }
+        }
+        
         // Метод открытия окон
-        private void OpenInterfaceSelectionWindow()
+        private void OpenInterfaceSelectionWindowMethod()
         {
             InterfaceSelectionWindow newInterfaceSelectionWindow = new InterfaceSelectionWindow();
             SetCenterPositionAndOpen(newInterfaceSelectionWindow);

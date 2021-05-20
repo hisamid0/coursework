@@ -12,5 +12,14 @@ namespace CourseWork.Model
         public string IpAddress { get; set; }
         public string Something { get; set; }
         public DateTime Date { get; set; }
+
+        public Package(string ipaddress, string something, DateTime date)
+        {
+            IpAddress = ipaddress;
+            Something = something;
+            Date = date;
+        }
+
+
     }
 }
