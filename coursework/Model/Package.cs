@@ -19,7 +19,10 @@ namespace CourseWork.Model
             Something = something;
             Date = date;
         }
+        public Package()
+        {
 
+        }
 
     }
 }

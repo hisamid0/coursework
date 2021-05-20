@@ -25,7 +25,7 @@ namespace CourseWork.Model
         {
 
             using ApplicationContext db = new ApplicationContext();
-            Package newPackage = new Package { Something = something, IpAddress = ipaddress, Date = date };
+            Package newPackage = new Package (ipaddress, something,date );
             db.Packages.Add(newPackage);
             db.SaveChanges();
             string result = "Пакет добавлен";

@@ -13,7 +13,7 @@ namespace CourseWork.Model.Data
         public DbSet<User> Users { get; set; }
         public ApplicationContext()
         {
-            Database.EnsureCreated();
+           Database.EnsureCreated();
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

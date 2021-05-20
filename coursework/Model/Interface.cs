@@ -17,7 +17,10 @@ namespace CourseWork.Model
             Name = name;
             MacAddress = macaddress;
         }
+        public Interface()
+        {
 
+        }
 
     }
 }
