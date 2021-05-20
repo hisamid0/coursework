@@ -10,13 +10,13 @@ namespace CourseWork.Model
         public static List<User> GetAllUsers()
         {
             using ApplicationContext db = new ApplicationContext();
-            var result = db.Users.ToList();
+            List<User> result = db.Users.ToList();
             return result;
         }
         public static List<Package> GetAllPackages()
         {
             using ApplicationContext db = new ApplicationContext();
-            var result = db.Packages.ToList();
+            List<Package> result = db.Packages.ToList();
             return result;
         }
 
@@ -50,7 +50,7 @@ namespace CourseWork.Model
             if (String.IsNullOrEmpty(text))
                 return String.Empty;
 
-            using var sha = new System.Security.Cryptography.SHA256Managed();
+            using System.Security.Cryptography.SHA256Managed sha = new System.Security.Cryptography.SHA256Managed();
             byte[] textData = System.Text.Encoding.UTF8.GetBytes(text);
             byte[] hash = sha.ComputeHash(textData);
             return BitConverter.ToString(hash).Replace("-", String.Empty);
