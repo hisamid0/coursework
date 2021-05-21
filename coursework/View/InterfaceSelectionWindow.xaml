@@ -15,9 +15,9 @@
                     VerticalAlignment="Center" 
                     Width="200">
             <Label Content="Выберете интерфейс"/>
-            <ComboBox />
+            <ListView ItemsSource="{Binding AllInterfaces}" SelectedItem="{Binding CurrentInterface}"/>
             
         </StackPanel>
-        <Button Grid.Row="1" Content="Выбрать" FontSize="20"/>
+        <Button Grid.Row="1" Content="Выбрать" FontSize="20" Command="{Binding SetCurrentInterface}"/>
     </Grid>
 </Window>

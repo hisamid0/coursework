@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using CourseWork.ViewModel;
 
 namespace CourseWork.View
 {
@@ -22,11 +23,9 @@ namespace CourseWork.View
         public LoginScreen()
         {
             InitializeComponent();
+            DataContext = new PackageManage();
         }
 
-        private void btnSubmit_Click(object sender, RoutedEventArgs e)
-        {
-            
-        }
+
     }
 }

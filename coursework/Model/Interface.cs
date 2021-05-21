@@ -22,5 +22,10 @@ namespace CourseWork.Model
 
         }
 
+        public override string ToString()
+        {
+            return  Name +" "+ MacAddress;
+        }
+
     }
 }

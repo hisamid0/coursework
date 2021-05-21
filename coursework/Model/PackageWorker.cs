@@ -14,17 +14,32 @@ namespace CourseWork.Model
     {
 
         private static List<Package> packages = new List<Package>();
-        public static List<Package> GetSomePackageInfo(ICaptureDevice device)
+        public static List<Package> GetSomePackageInfo(Interface interfaces)
         {
-            Timer timer = new Timer();
-            ICaptureDevice selectedDevice = device;
-            List<Package> packages = new List<Package>();
+            CaptureDeviceList devices = CaptureDeviceList.Instance;
+            string bufferName;
+            string bufferMacAddress;
+            
+            List<Interface> allInterfaces = new List<Interface>();
+            foreach (ILiveDevice dev in devices)
+            {
+                bufferName = dev.Name;
+                bufferMacAddress = dev.MacAddress.ToString();
+                if((interfaces.MacAddress == bufferMacAddress)&&(interfaces.Name == bufferName) )
+                {
 
-            device.OnPacketArrival += (sender, e)=> packages.Add(device_OnPacketArrival(e.GetPacket()));
-            device.Open();
-            device.Capture();
-            device.Close();
-            return packages;
+                    ICaptureDevice selectedDevice = dev;
+                    List<Package> packages = new List<Package>();
+
+                    dev.OnPacketArrival += (sender, e) => packages.Add(device_OnPacketArrival(e.GetPacket()));
+                    dev.Open();
+                    dev.Capture();
+                    dev.Close();
+                    return packages;
+                }
+            }
+            return null;
+           
 
         }
 
