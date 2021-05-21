@@ -30,11 +30,13 @@ namespace CourseWork.Model
 
                     ICaptureDevice selectedDevice = dev;
                     List<Package> packages = new List<Package>();
-
-                    dev.OnPacketArrival += (sender, e) => packages.Add(device_OnPacketArrival(e.GetPacket()));
-                    dev.Open();
-                    dev.Capture();
-                    dev.Close();
+                    
+                        dev.OnPacketArrival += (sender, e) =>  packages.Add(device_OnPacketArrival(e.GetPacket(),packages.Count(),interfaces));
+                        dev.Open();
+                        dev.Capture();
+                   
+                    
+                        dev.Close();
                     return packages;
                 }
             }
@@ -44,20 +46,49 @@ namespace CourseWork.Model
         }
 
 
-        private static Package device_OnPacketArrival(RawCapture rawPacket)
+        private static Package device_OnPacketArrival(RawCapture rawPacket, int packageCount, Interface @interface)
         {
-            PacketDotNet.Packet packet = PacketDotNet.Packet.ParsePacket(rawPacket.LinkLayerType, rawPacket.Data);
-            packet.ToString();
-            PacketDotNet.IPPacket ip = packet.Extract<PacketDotNet.IPPacket>();
-            string something= "Информация по пакету";
-            if (packet is PacketDotNet.EthernetPacket eth)
+            if (packageCount <= 40)
             {
-                something = eth.ToString();
-            }
-            DateTime dateTime = new DateTime();
-            Package newPackage = new Package(ip.SourceAddress.ToString(),something,dateTime.Date.Date);
+                PacketDotNet.Packet packet = PacketDotNet.Packet.ParsePacket(rawPacket.LinkLayerType, rawPacket.Data);
+                packet.ToString();
+                PacketDotNet.IPPacket ip = packet.Extract<PacketDotNet.IPPacket>();
+                string something = "Информация по пакету";
+                if (packet is PacketDotNet.EthernetPacket eth)
+                {
+                    something = eth.ToString();
+                }
+                Package newPackage;
+                DateTime dateTime = new DateTime();
+                if (ip == null)
+                    newPackage = new Package("0.0.0.0", something, dateTime.Date);
+                else
+                    newPackage = new Package(ip.SourceAddress.ToString(), something, dateTime.Date);
 
-            return newPackage;
+                return newPackage;
+            }
+            else
+            {
+                CaptureDeviceList devices = CaptureDeviceList.Instance;
+                string bufferName;
+                string bufferMacAddress;
+
+                List<Interface> allInterfaces = new List<Interface>();
+                foreach (ILiveDevice dev in devices)
+                {
+                    bufferName = dev.Name;
+                    bufferMacAddress = dev.MacAddress.ToString();
+                    if ((@interface.MacAddress == bufferMacAddress) && (@interface.Name == bufferName))
+                    {
+                        ICaptureDevice selectedDevice = dev;
+                        dev.StopCapture();
+                        dev.Close();
+                        return null;
+                    }
+                    
+                }
+                return null;
+            }
         }
         public static List<Interface> GetAllInterfaces()
         {
