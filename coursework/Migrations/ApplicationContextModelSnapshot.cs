@@ -29,10 +29,25 @@ namespace CourseWork.Migrations
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("DestinationHardwareAddress")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DestinationPort")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("IpAddress")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("PayLoadData")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Protocol")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("SourceHardwareAddress")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SourcePort")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");

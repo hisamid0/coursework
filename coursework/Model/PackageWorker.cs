@@ -30,7 +30,7 @@ namespace CourseWork.Model
                 bufferMacAddress = dev.MacAddress.ToString();
                 if((interfaces.MacAddress == bufferMacAddress)&&(interfaces.Name == bufferName) )
                 {
-                    while (packages.Count() < 40)
+                    while (packages.Count() < 500)
                     {
                         ICaptureDevice selectedDevice = dev;
                         //List<Package> packages = new List<Package>();
@@ -48,7 +48,14 @@ namespace CourseWork.Model
                         string sourceHardwareAddress = "";
                         string destinationHardwareAddress = "";
                         string payLoadData = "";
-
+                        string destinationPort = "";
+                        string sourcePort = "";
+                        var tcp = packet.Extract<PacketDotNet.TcpPacket>();
+                        if (tcp != null) 
+                        {
+                            destinationPort = tcp.DestinationPort.ToString();
+                            sourcePort = tcp.SourcePort.ToString();
+                        }
                         if (packet is PacketDotNet.EthernetPacket eth)
                         {
                             sourceHardwareAddress = eth.SourceHardwareAddress.ToString();
@@ -59,12 +66,12 @@ namespace CourseWork.Model
                         Package newPackage;
                         DateTime dateTime = new DateTime();
                         if (ip == null)
-                            newPackage = new Package("0.0.0.0","???", sourceHardwareAddress, dateTime.Date,destinationHardwareAddress,payLoadData);
+                            newPackage = new Package("0.0.0.0","???","?????","?????", sourceHardwareAddress, dateTime.Date,destinationHardwareAddress,payLoadData);
                         else
-                            newPackage = new Package(ip.SourceAddress.ToString(),ip.Protocol.ToString(), sourceHardwareAddress, dateTime.Date,destinationHardwareAddress,payLoadData);
+                            newPackage = new Package(ip.SourceAddress.ToString(),ip.Protocol.ToString(),sourcePort,destinationPort, sourceHardwareAddress, dateTime.Date,destinationHardwareAddress,payLoadData);
                         
                         dev.Close();
-                        packages.Add(new Package(newPackage.IpAddress,newPackage.Protocol, newPackage.SourceHardwareAddress, DateTime.Now,destinationHardwareAddress,payLoadData));
+                        packages.Add(new Package(newPackage.IpAddress,newPackage.Protocol,sourcePort,destinationPort, newPackage.SourceHardwareAddress, DateTime.Now,destinationHardwareAddress,payLoadData));
                     }
 
                     return packages;

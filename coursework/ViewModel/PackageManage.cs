@@ -122,7 +122,7 @@ namespace CourseWork.ViewModel
             List<Package> res = new List<Package>();
             res = PackageWorker.GetSomePackageInfo(SelectedInterface);
             foreach (var pack in res)
-                DataWorker.UploadPackage(pack.IpAddress,pack.Protocol, pack.SourceHardwareAddress,DateTime.Now,pack.DestinationHardwareAddress,pack.PayLoadData);
+                DataWorker.UploadPackage(pack.IpAddress,pack.Protocol,pack.SourcePort,pack.DestinationPort, pack.SourceHardwareAddress,DateTime.Now,pack.DestinationHardwareAddress,pack.PayLoadData);
             CloseInterfaceSeletionWindowMethod();
             UpdateAllPackages();
         }
