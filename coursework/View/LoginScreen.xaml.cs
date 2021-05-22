@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using CourseWork.Model;
 using CourseWork.ViewModel;
 
 namespace CourseWork.View
@@ -24,8 +25,12 @@ namespace CourseWork.View
         {
             InitializeComponent();
             DataContext = new PackageManage();
+
         }
 
+        private void btnSubmit_Click(object sender, RoutedEventArgs e)
+        {
 
+        }
     }
 }

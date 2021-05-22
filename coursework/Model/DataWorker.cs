@@ -13,6 +13,26 @@ namespace CourseWork.Model
             List<User> result = db.Users.ToList();
             return result;
         }
+        public static string SetLabelContent()
+        {
+            string labelContent;
+            List<User> usr = GetAllUsers();
+            if (usr.Count != 0)
+                labelContent = "Введите пароль";
+            else
+                labelContent = "Введите пароль для регистрации";
+            return labelContent;
+        }
+        public static string SetLoginOrRegisterButtonContent()
+        {
+            string buttonContent;
+            List<User> usr = GetAllUsers();
+            if (usr.Count != 0)
+                buttonContent = "Войти";
+            else
+                buttonContent = "Зарегистрироваться";
+            return buttonContent;
+        }
         public static List<Package> GetAllPackages()
         {
             using ApplicationContext db = new ApplicationContext();
@@ -34,11 +54,11 @@ namespace CourseWork.Model
         }
         
         // Внести данные администратора
-        public static string CreatUser(string name, string password)
+        public static string CreatUser(string password)
         {
             string hashPass = GetStringSha256Hash(password);
             using ApplicationContext db = new ApplicationContext();
-            User newUser = new User { Name = name, Password = hashPass };
+            User newUser = new User { Password = hashPass };
             db.Users.Add(newUser);
             db.SaveChanges();
             string result = "Пользователь добавлен";

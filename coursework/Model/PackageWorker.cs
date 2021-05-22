@@ -35,7 +35,7 @@ namespace CourseWork.Model
                         ICaptureDevice selectedDevice = dev;
                         //List<Package> packages = new List<Package>();
                         //packages.Add(new Package("255.255.255.255", "someinfo", DateTime.Now));
-                        int readTimeoutMilliseconds = 1000;
+                        int readTimeoutMilliseconds = 100;
                         dev.Open(DeviceMode.Promiscuous, readTimeoutMilliseconds);
                         
                         RawCapture rawCapture = null;

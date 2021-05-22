@@ -45,6 +45,78 @@ namespace CourseWork.ViewModel
             }
         }
 
+        private string loginLabelContent = DataWorker.SetLabelContent();
+        public string LoginLabelContent
+        {
+            get { return loginLabelContent; }
+            set
+            {
+                loginLabelContent = value;
+                NotifyPropertyChanged("LoginLabelContent");
+            }
+        }
+        private string loginOrRegisterButtonContent = DataWorker.SetLoginOrRegisterButtonContent();
+        public string LoginOrRegisterButtonContent
+        {
+            get { return loginOrRegisterButtonContent; }
+            set
+            {
+                LoginOrRegisterButtonContent = value;
+                NotifyPropertyChanged("LoginOrRegisterButtonContent");
+            }
+        }
+
+        private string passwordBoxContent;
+        public string PasswordBoxContent
+        {
+            get { return passwordBoxContent; }
+            set
+            {
+                loginLabelContent = value;
+                NotifyPropertyChanged("PasswordBoxContent");
+            }
+        }
+
+
+        private RelayCommand registerOrLoginCommand;
+        public RelayCommand RegisterOrLoginCommand
+        {
+            get
+            {
+                return registerOrLoginCommand ?? new RelayCommand(obj =>
+                {
+                    
+                    List<User> usr = DataWorker.GetAllUsers();
+                    Window wnd = obj as Window;
+                    if (usr.Count() == 0)
+                    {
+                        DataWorker.CreatUser(PasswordBoxContent);
+                        wnd.Close();
+                        OpenMainWindowMethod();
+                        
+                    }
+                    else
+                    {
+                        foreach (User u in usr)
+                        {
+                            passwordBoxContent = "";
+                            if (u.Password == passwordBoxContent.ToString())
+                            {
+                                wnd.Close();
+                                OpenMainWindowMethod();
+                                
+                            }
+                            else
+                            {
+                                MessageBox.Show("Введён неверный пароль", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                                passwordBoxContent = null;
+                            }
+                        }
+                    }
+                }
+                );
+            }
+        }
         public Interface CurrentInterface { get; set; }
         private static Interface SelectedInterface { get; set; }
 
@@ -112,6 +184,11 @@ namespace CourseWork.ViewModel
             InterfaceSelectionWindow newInterfaceSelectionWindow = new InterfaceSelectionWindow();
             SetCenterPositionAndOpen(newInterfaceSelectionWindow);
         }
+        private void OpenMainWindowMethod()
+        {
+            MainWindow newMainWindow = new MainWindow();
+            SetCenterPositionAndOpen(newMainWindow);
+        }
         private void CloseInterfaceSeletionWindowMethod()
         {
             InterfaceSelectionWindow newInterfaceSelectionWindow = new InterfaceSelectionWindow();
@@ -132,7 +209,6 @@ namespace CourseWork.ViewModel
         }
         private void SetCenterPositionAndOpen(Window window)
         {
-            window.Owner = Application.Current.MainWindow;
             window.WindowStartupLocation = WindowStartupLocation.CenterOwner;
             window.ShowDialog();
         }

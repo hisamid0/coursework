@@ -3,19 +3,18 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:CourseWork.View"
+        xmlns:local="clr-namespace:CourseWork.View" xmlns:components="clr-namespace:CourseWork.Components" xmlns:viewmodel="clr-namespace:CourseWork.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:PackageManage}"
         mc:Ignorable="d"
-        Title="Login" Height="300" Width="300" Background="DarkBlue">
-    <Border Background="DarkSlateGray" CornerRadius="20" Margin="20">
+        Title="Вход в систему" Height="246" Width="300" Background="LightGray"
+        Name="LoginScreenWnd">
+    <Border  CornerRadius="20" Margin="20,20,20,20" Background="DarkGray">
         <StackPanel Margin="20">
-            <Label Content="Логин" Foreground="White" FontSize="25" HorizontalAlignment="Center" ></Label>
+            <Label Content="{Binding LoginLabelContent}"  FontSize="12" HorizontalAlignment="Center" ></Label>
             <Separator/>
-            <Label Content="Имя пользователя" Foreground="White"/>
-            <TextBox x:Name="txtUserName" Background="#545d6a" Foreground="White" FontSize="18"/>
-            <Label Content="Пароль" Foreground="White"/>
-            <PasswordBox x:Name="txtPassword" Background="#545d6a" Foreground="White" FontSize="18"/>
+            <Label Content="Пароль" />
+            <components:BindablePasswordBox  FontSize="18" Password="{Binding PasswordBoxContent, Mode=TwoWay}" />
             <Separator/>
-            <Button x:Name="btnSubmit" Content="Войти" Background="#545d6a" Foreground="White" FontSize="18"/>
+            <Button Content="{Binding LoginOrRegisterButtonContent}"  Command="{Binding RegisterOrLoginCommand}" CommandParameter="{Binding ElementName=LoginScreenWnd}" FontSize="12" Click="btnSubmit_Click"/>
 
         </StackPanel>
     </Border>
