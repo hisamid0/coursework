@@ -7,6 +7,8 @@ using SharpPcap;
 using SharpPcap.LibPcap;
 using System.Timers;
 using System.Net.NetworkInformation;
+using System.Threading;
+using PacketDotNet;
 
 namespace CourseWork.Model
 {
@@ -163,7 +165,7 @@ namespace CourseWork.Model
                 PacketDotNet.Packet packet = PacketDotNet.Packet.ParsePacket(rawPacket.LinkLayerType, rawPacket.Data);
                 packet.ToString();
                 PacketDotNet.IPPacket ip = packet.Extract<PacketDotNet.IPPacket>();
-                string something = "Информация по пакету";
+               string something = "Информация по пакету";
                 if (packet is PacketDotNet.EthernetPacket eth)
                 {
                     something = eth.ToString();
