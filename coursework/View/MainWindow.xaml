@@ -16,11 +16,17 @@
                 <TabItem.Header>
                     <TextBlock Text="Информация о пакете"></TextBlock>
                 </TabItem.Header>
-                <ListView ItemsSource="{Binding AllPackages}">
+                <ListView x:Name="ViewAllPackages" ItemsSource="{Binding AllPackages}">
                     <ListView.View>
                         <GridView>
-                            <GridViewColumn Header="Колонка одын"/>
-                            <GridViewColumn Header="Колонка дыва"/>
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=Id}" Header="№"/>
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=IpAddress}" Header="IP адрес отправляющего"/>
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=Protocol}" Header="Протокол"/>
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=SourceHardwareAddress}" Header="MAC адрес отправляющего"/>
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=DestinationHardwareAddress}" Header="MAC адрес получателя"/>
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=Date}" Header="Время захвата пакета"/>
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=PayLoadData}" Header="Полезная нагрузка"/>
+                            
                         </GridView>
                     </ListView.View>
                 </ListView>
@@ -28,7 +34,7 @@
         </TabControl>
         <StackPanel Grid.Row="1" Orientation="Horizontal" >
         <Button   Content="Выбрать интерфейс" Margin="5" Command="{Binding OpenInterfaceSelectionWindow}"/>
-        <Button   Content="Начать сбор пакетов" Margin="5" Command="{Binding }"/>
+        <Button   Content="Начать сбор пакетов" Margin="5" Command="{Binding StartCollectingPackageInfo}"/>
         </StackPanel>
     </Grid>
 </Window>

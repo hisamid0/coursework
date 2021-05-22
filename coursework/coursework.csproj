@@ -14,14 +14,12 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="MySql.Data.EntityFramework" Version="8.0.25" />
+    <PackageReference Include="SharpPcap" Version="5.4.0" />
   </ItemGroup>
 
   <ItemGroup>
     <Reference Include="PacketDotNet">
       <HintPath>..\..\..\..\.nuget\packages\packetdotnet\1.2.0\lib\netstandard2.0\PacketDotNet.dll</HintPath>
-    </Reference>
-    <Reference Include="SharpPcap">
-      <HintPath>..\..\sharppcap\SharpPcap\bin\Debug\netstandard2.0\SharpPcap.dll</HintPath>
     </Reference>
   </ItemGroup>
 

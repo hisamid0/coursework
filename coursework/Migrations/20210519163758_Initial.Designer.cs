@@ -30,7 +30,7 @@ namespace CourseWork.Migrations
                     b.Property<string>("IpAddress")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Something")
+                    b.Property<string>("SourceHardwareAddress")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");

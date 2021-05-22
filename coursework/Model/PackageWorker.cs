@@ -23,24 +23,58 @@ namespace CourseWork.Model
             string bufferMacAddress;
             
             List<Interface> allInterfaces = new List<Interface>();
-            foreach (ILiveDevice dev in devices)
+            foreach (ICaptureDevice dev in devices)
             {
+                dev.Open();
                 bufferName = dev.Name;
                 bufferMacAddress = dev.MacAddress.ToString();
                 if((interfaces.MacAddress == bufferMacAddress)&&(interfaces.Name == bufferName) )
                 {
+                    while (packages.Count() < 40)
+                    {
+                        ICaptureDevice selectedDevice = dev;
+                        //List<Package> packages = new List<Package>();
+                        //packages.Add(new Package("255.255.255.255", "someinfo", DateTime.Now));
+                        int readTimeoutMilliseconds = 1000;
+                        dev.Open(DeviceMode.Promiscuous, readTimeoutMilliseconds);
+                        
+                        RawCapture rawCapture = null;
+                        rawCapture = dev.GetNextPacket();
+                        if (rawCapture == null)
+                            continue;
+                        PacketDotNet.Packet packet = PacketDotNet.Packet.ParsePacket(rawCapture.LinkLayerType, rawCapture.Data);
+                        packet.ToString();
+                        PacketDotNet.IPPacket ip = packet.Extract<PacketDotNet.IPPacket>();
+                        string sourceHardwareAddress = "";
+                        string destinationHardwareAddress = "";
+                        string payLoadData = "";
 
-                    ICaptureDevice selectedDevice = dev;
-                    List<Package> packages = new List<Package>();
-                    
-                        dev.OnPacketArrival += (sender, e) =>  packages.Add(device_OnPacketArrival(e.GetPacket(),packages.Count(),interfaces));
-                        dev.Open();
-                        dev.Capture();
+                        if (packet is PacketDotNet.EthernetPacket eth)
+                        {
+                            sourceHardwareAddress = eth.SourceHardwareAddress.ToString();
+                            destinationHardwareAddress = eth.DestinationHardwareAddress.ToString();
+                            if(eth.BytesSegment != null)
+                                payLoadData = eth.BytesSegment.ToString();
+                        }
+                        Package newPackage;
+                        DateTime dateTime = new DateTime();
+                        if (ip == null)
+                            newPackage = new Package("0.0.0.0","???", sourceHardwareAddress, dateTime.Date,destinationHardwareAddress,payLoadData);
+                        else
+                            newPackage = new Package(ip.SourceAddress.ToString(),ip.Protocol.ToString(), sourceHardwareAddress, dateTime.Date,destinationHardwareAddress,payLoadData);
+                        
+                        dev.Close();
+                        packages.Add(new Package(newPackage.IpAddress,newPackage.Protocol, newPackage.SourceHardwareAddress, DateTime.Now,destinationHardwareAddress,payLoadData));
+                    }
+
+                    return packages;
+                    //dev.Capture();
+
+
                    
                     
-                        dev.Close();
-                    return packages;
                 }
+                dev.Close();
             }
             return null;
            
@@ -48,61 +82,20 @@ namespace CourseWork.Model
         }
 
 
-        private static Package device_OnPacketArrival(RawCapture rawPacket, int packageCount, Interface @interface)
-        {
-            if (packageCount <= 40)
-            {
-                PacketDotNet.Packet packet = PacketDotNet.Packet.ParsePacket(rawPacket.LinkLayerType, rawPacket.Data);
-                packet.ToString();
-                PacketDotNet.IPPacket ip = packet.Extract<PacketDotNet.IPPacket>();
-               string something = "Информация по пакету";
-                if (packet is PacketDotNet.EthernetPacket eth)
-                {
-                    something = eth.ToString();
-                }
-                Package newPackage;
-                DateTime dateTime = new DateTime();
-                if (ip == null)
-                    newPackage = new Package("0.0.0.0", something, dateTime.Date);
-                else
-                    newPackage = new Package(ip.SourceAddress.ToString(), something, dateTime.Date);
 
-                return newPackage;
-            }
-            else
-            {
-                CaptureDeviceList devices = CaptureDeviceList.Instance;
-                string bufferName;
-                string bufferMacAddress;
-
-                List<Interface> allInterfaces = new List<Interface>();
-                foreach (ILiveDevice dev in devices)
-                {
-                    bufferName = dev.Name;
-                    bufferMacAddress = dev.MacAddress.ToString();
-                    if ((@interface.MacAddress == bufferMacAddress) && (@interface.Name == bufferName))
-                    {
-                        ICaptureDevice selectedDevice = dev;
-                        dev.StopCapture();
-                        dev.Close();
-                        return null;
-                    }
-                    
-                }
-                return null;
-            }
-        }
         public static List<Interface> GetAllInterfaces()
         {
             CaptureDeviceList devices = CaptureDeviceList.Instance;
             string bufferName;
             string bufferMacAddress;
             List<Interface> interfaces = new List<Interface>();
-            foreach (ILiveDevice dev in devices)
+            foreach (ICaptureDevice dev in devices)
             {
                 bufferName = dev.Name;
+                dev.Open();
                 bufferMacAddress = dev.MacAddress.ToString();
                 interfaces.Add(new Interface(bufferName, bufferMacAddress));
+                dev.Close();
             }
             return interfaces;
         }

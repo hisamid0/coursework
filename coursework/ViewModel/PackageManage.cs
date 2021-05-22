@@ -46,6 +46,7 @@ namespace CourseWork.ViewModel
         }
 
         public Interface CurrentInterface { get; set; }
+        private static Interface SelectedInterface { get; set; }
 
         private RelayCommand setCurrentInterface;
         public RelayCommand SetCurrentInterface
@@ -54,11 +55,10 @@ namespace CourseWork.ViewModel
             {
                 return setCurrentInterface ?? new RelayCommand(obj =>
                 {
-                    List<Package> res = new List<Package>();
-                    res = PackageWorker.GetSomePackageInfo(CurrentInterface);
-                    foreach (var pack in res)
-                        DataWorker.UploadPackage(pack.Something, pack.IpAddress, DateTime.Now);
-                    CloseInterfaceSeletionWindowMethod();
+                    SelectedInterface = CurrentInterface;
+                    Window wnd = obj as Window;
+                    wnd.Close();
+                    
                 }
                 );
             }
@@ -75,6 +75,18 @@ namespace CourseWork.ViewModel
                 return openInterfaceSelectionWindow ?? new RelayCommand(obj =>
                 {
                     OpenInterfaceSelectionWindowMethod();
+                }
+                );
+            }
+        }
+        private RelayCommand startCollectingPackageInfo;
+        public RelayCommand StartCollectingPackageInfo
+        {
+            get
+            {
+                return startCollectingPackageInfo ?? new RelayCommand(obj =>
+                {
+                    StartCollectingPackageInfoMethod();
                 }
                 );
             }
@@ -105,6 +117,15 @@ namespace CourseWork.ViewModel
             InterfaceSelectionWindow newInterfaceSelectionWindow = new InterfaceSelectionWindow();
             CloseWindow(newInterfaceSelectionWindow);
         }
+        public void StartCollectingPackageInfoMethod()
+        {
+            List<Package> res = new List<Package>();
+            res = PackageWorker.GetSomePackageInfo(SelectedInterface);
+            foreach (var pack in res)
+                DataWorker.UploadPackage(pack.IpAddress,pack.Protocol, pack.SourceHardwareAddress,DateTime.Now,pack.DestinationHardwareAddress,pack.PayLoadData);
+            CloseInterfaceSeletionWindowMethod();
+            UpdateAllPackages();
+        }
         private void CloseWindow(Window window)
         {
             window.Close();
@@ -124,6 +145,15 @@ namespace CourseWork.ViewModel
             {
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
             }
+        }
+
+        private void UpdateAllPackages()
+        {
+            AllPackages = DataWorker.GetAllPackages();
+            MainWindow.AllPackages.ItemsSource = null;
+            MainWindow.AllPackages.Items.Clear();
+            MainWindow.AllPackages.ItemsSource = AllPackages;
+            MainWindow.AllPackages.Items.Refresh();
         }
     }
 }

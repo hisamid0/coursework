@@ -10,13 +10,20 @@ namespace CourseWork.Model
     {
         public int Id { get; set; }
         public string IpAddress { get; set; }
-        public string Something { get; set; }
+        public string Protocol { get; set; }
+        public string SourceHardwareAddress { get; set; }
+        public string DestinationHardwareAddress { get; set; }
+        public string PayLoadData { get; set; }
+
         public DateTime Date { get; set; }
 
-        public Package(string ipaddress, string something, DateTime date)
+        public Package(string ipaddress,string protocol, string sourceHardwareAddress, DateTime date, string destinationHardwareAddress,string payLoadData)
         {
             IpAddress = ipaddress;
-            Something = something;
+            Protocol = protocol;
+            SourceHardwareAddress = sourceHardwareAddress;
+            DestinationHardwareAddress = destinationHardwareAddress;
+            PayLoadData = payLoadData;
             Date = date;
         }
         public Package()

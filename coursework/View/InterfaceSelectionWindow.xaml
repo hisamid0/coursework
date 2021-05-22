@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CourseWork.View"
         mc:Ignorable="d"
-        Title="InterfaceSelectionWindow" Height="186" Width="246">
+        Title="InterfaceSelectionWindow" Height="186" Width="246"
+        Name="InterfaceSelectionWnd">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"></RowDefinition>
@@ -18,6 +19,6 @@
             <ListView ItemsSource="{Binding AllInterfaces}" SelectedItem="{Binding CurrentInterface}"/>
             
         </StackPanel>
-        <Button Grid.Row="1" Content="Выбрать" FontSize="20" Command="{Binding SetCurrentInterface}"/>
+        <Button Grid.Row="1" Content="Выбрать" FontSize="20" Command="{Binding SetCurrentInterface}" CommandParameter="{Binding ElementName=InterfaceSelectionWnd}"/>
     </Grid>
 </Window>

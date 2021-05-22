@@ -21,11 +21,11 @@ namespace CourseWork.Model
         }
 
         //Выгрузить полученный пакет в базу
-        public static string UploadPackage(string something,string ipaddress, DateTime date)
+        public static string UploadPackage(string ipaddress, string protocol, string sourceHardwareAddress,DateTime date, string destinationHardwareAddress, string payLoadData)
         {
 
             using ApplicationContext db = new ApplicationContext();
-            Package newPackage = new Package (ipaddress, something,date );
+            Package newPackage = new Package (ipaddress,protocol,sourceHardwareAddress,date,destinationHardwareAddress,payLoadData);
             db.Packages.Add(newPackage);
             db.SaveChanges();
             string result = "Пакет добавлен";

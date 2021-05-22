@@ -15,7 +15,7 @@ using System.Windows.Shapes;
 using CourseWork.ViewModel;
 using SharpPcap;
 using SharpPcap.LibPcap;
-using SharpPcap.Statistics;
+
 namespace CourseWork.View
 {
     /// <summary>
@@ -23,10 +23,12 @@ namespace CourseWork.View
     /// </summary>
     public partial class MainWindow : Window
     {
+        public static ListView AllPackages;
         public MainWindow()
         {
             InitializeComponent();
             DataContext = new PackageManage();
+            AllPackages = ViewAllPackages;
         }
 
 
