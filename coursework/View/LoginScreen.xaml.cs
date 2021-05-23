@@ -28,9 +28,6 @@ namespace CourseWork.View
 
         }
 
-        private void btnSubmit_Click(object sender, RoutedEventArgs e)
-        {
 
-        }
     }
 }

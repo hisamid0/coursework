@@ -72,7 +72,7 @@ namespace CourseWork.ViewModel
             get { return passwordBoxContent; }
             set
             {
-                loginLabelContent = value;
+                passwordBoxContent = value;
                 NotifyPropertyChanged("PasswordBoxContent");
             }
         }
@@ -91,20 +91,19 @@ namespace CourseWork.ViewModel
                     if (usr.Count() == 0)
                     {
                         DataWorker.CreatUser(PasswordBoxContent);
-                        wnd.Close();
+                       
                         OpenMainWindowMethod();
-                        
+                        wnd.Close();
+
                     }
                     else
                     {
                         foreach (User u in usr)
                         {
-                            passwordBoxContent = "";
-                            if (u.Password == passwordBoxContent.ToString())
+                            //passwordBoxContent = "";
+                            if (u.Password.ToString() == DataWorker.GetStringSha256Hash(passwordBoxContent))
                             {
-                                wnd.Close();
                                 OpenMainWindowMethod();
-                                
                             }
                             else
                             {
@@ -210,7 +209,7 @@ namespace CourseWork.ViewModel
         private void SetCenterPositionAndOpen(Window window)
         {
             window.WindowStartupLocation = WindowStartupLocation.CenterOwner;
-            window.ShowDialog();
+            window.Show();
         }
         #endregion
 

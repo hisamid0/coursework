@@ -14,7 +14,7 @@
             <Label Content="Пароль" />
             <components:BindablePasswordBox  FontSize="18" Password="{Binding PasswordBoxContent, Mode=TwoWay}" />
             <Separator/>
-            <Button Content="{Binding LoginOrRegisterButtonContent}"  Command="{Binding RegisterOrLoginCommand}" CommandParameter="{Binding ElementName=LoginScreenWnd}" FontSize="12" Click="btnSubmit_Click"/>
+            <Button Content="{Binding LoginOrRegisterButtonContent}"  Command="{Binding RegisterOrLoginCommand}" CommandParameter="{Binding ElementName=LoginScreenWnd}" FontSize="12" />
 
         </StackPanel>
     </Border>
