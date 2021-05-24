@@ -107,5 +107,26 @@ namespace CourseWork.Model
             return interfaces;
         }
 
+        public static List<AnalysisResult> GetAllUniquesIpMac(List<Package> packages)
+        {
+            List<AnalysisResult> analysisResults = new List<AnalysisResult>();
+            foreach (Package pack in packages)
+            {
+                analysisResults.Add(new AnalysisResult(pack.IpAddress, pack.Protocol, pack.SourcePort, pack.DestinationPort, pack.SourceHardwareAddress, pack.DestinationHardwareAddress));
+            }
+            
+            return analysisResults;
+        }
+
+        public static List<AnalysisResult> PackageAnalyzer(List<AnalysisResult> analysisResults)
+        {
+            foreach (var aRes in analysisResults)
+            {
+                aRes.ThreatLevel = "5";                
+            }
+            return analysisResults;   
+
+        }
+
     }
 }
