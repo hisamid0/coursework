@@ -34,10 +34,33 @@
                     </ListView.View>
                 </ListView>
             </TabItem>
+            <TabItem Name="Package_analyze">
+                <TabItem.Header>
+                    <TextBlock Text="Результат анализа"></TextBlock>
+                </TabItem.Header>
+                <ListView x:Name="ViewPackageAnalyze" ItemsSource="{Binding AllAnalysisResults}">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=Id}" Header="№"/>
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=IpAddress}" Header="IP адрес отправляющего"/>
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=Protocol}" Header="Протокол"/>
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=SourcePort}" Header="Порт отправляющего"/>
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=DestinationPort}" Header="Порт получателя"/>
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=SourceHardwareAddress}" Header="MAC адрес отправляющего"/>
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=DestinationHardwareAddress}" Header="MAC адрес получателя"/>
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=ThreatLEvel}" Header="MAC адрес получателя"/>
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=NecessaryMeasures}" Header="MAC адрес получателя"/>
+
+
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </TabItem>
         </TabControl>
         <StackPanel Grid.Row="1" Orientation="Horizontal" >
-        <Button   Content="Выбрать интерфейс" Margin="5" Command="{Binding OpenInterfaceSelectionWindow}"/>
-        <Button   Content="Начать сбор пакетов" Margin="5" Command="{Binding StartCollectingPackageInfo}"/>
+            <Button   Content="Выбрать интерфейс" Margin="5" Padding="5" Command="{Binding OpenInterfaceSelectionWindow}"/>
+            <Button   Content="Начать сбор пакетов" Margin="5" Padding="5" Command="{Binding StartCollectingPackageInfo}"/>
+            <Button   Content="Начать анализ" Margin="5" Padding="5" Command="{Binding StartAnalysis}"/>
         </StackPanel>
     </Grid>
 </Window>

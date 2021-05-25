@@ -61,7 +61,7 @@ namespace CourseWork.ViewModel
             get { return loginOrRegisterButtonContent; }
             set
             {
-                LoginOrRegisterButtonContent = value;
+                loginOrRegisterButtonContent = value;
                 NotifyPropertyChanged("LoginOrRegisterButtonContent");
             }
         }
@@ -74,6 +74,30 @@ namespace CourseWork.ViewModel
             {
                 passwordBoxContent = value;
                 NotifyPropertyChanged("PasswordBoxContent");
+            }
+        }
+
+        private List<AnalysisResult> allAnalysisResults = PackageWorker.PackageAnalyzer(PackageWorker.GetAllUniquesIpMac(DataWorker.GetAllPackages()));
+        public List<AnalysisResult> AllAnalysisResults
+        {
+            get { return allAnalysisResults; }
+            set
+            {
+                allAnalysisResults = value;
+                NotifyPropertyChanged("AllAnalysisResults");
+            }
+        }
+        private RelayCommand startAnalysis;
+        public RelayCommand StartAnalysis
+        {
+            get
+            {
+                return startAnalysis ?? new RelayCommand(obj =>
+                {
+                    allAnalysisResults = PackageWorker.PackageAnalyzer(PackageWorker.GetAllUniquesIpMac(DataWorker.GetAllPackages()));
+                    allAnalysisResults.Distinct();
+                }
+                );
             }
         }
 
