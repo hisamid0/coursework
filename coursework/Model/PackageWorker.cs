@@ -130,7 +130,8 @@ namespace CourseWork.Model
             {
                 aRes.ThreatLevel = "5";                
             }
-            return analysisResults;   
+
+            return analysisResults.Distinct().ToList();   
 
         }
 
