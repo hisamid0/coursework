@@ -54,11 +54,11 @@ namespace CourseWork.Model
         }
         
         // Внести данные администратора
-        public static string CreatUser(string password)
+        public static string CreatUser(string login, string password)
         {
             string hashPass = GetStringSha256Hash(password);
             using ApplicationContext db = new ApplicationContext();
-            User newUser = new User { Password = hashPass };
+            User newUser = new User(login, hashPass);
             db.Users.Add(newUser);
             db.SaveChanges();
             string result = "Пользователь добавлен";

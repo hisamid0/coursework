@@ -24,11 +24,13 @@ namespace CourseWork.View
     public partial class MainWindow : Window
     {
         public static ListView AllPackages;
+        public static ListView AllAnalysisResults;
         public MainWindow()
         {
             InitializeComponent();
             DataContext = new PackageManage();
             AllPackages = ViewAllPackages;
+            AllAnalysisResults = ViewAllAnalysisResults;
         }
 
 

@@ -77,6 +77,18 @@ namespace CourseWork.ViewModel
             }
         }
 
+        private string loginTextBoxContent;
+        public string LoginTextBoxContent
+        {
+            get { return loginTextBoxContent; }
+            set
+            {
+                loginTextBoxContent = value;
+                NotifyPropertyChanged("LoginTextBoxContent");
+            }
+        }
+
+
         private List<AnalysisResult> allAnalysisResults = PackageWorker.PackageAnalyzer(PackageWorker.GetAllUniquesIpMac(DataWorker.GetAllPackages()));
         public List<AnalysisResult> AllAnalysisResults
         {
@@ -94,8 +106,7 @@ namespace CourseWork.ViewModel
             {
                 return startAnalysis ?? new RelayCommand(obj =>
                 {
-                    allAnalysisResults = PackageWorker.PackageAnalyzer(PackageWorker.GetAllUniquesIpMac(DataWorker.GetAllPackages()));
-                    allAnalysisResults.Distinct();
+                    UpdateAllAnalyzedIP();
                 }
                 );
             }
@@ -114,7 +125,7 @@ namespace CourseWork.ViewModel
                     Window wnd = obj as Window;
                     if (usr.Count() == 0)
                     {
-                        DataWorker.CreatUser(PasswordBoxContent);
+                        DataWorker.CreatUser(LoginTextBoxContent,PasswordBoxContent);
                        
                         OpenMainWindowMethod();
                         wnd.Close();
@@ -125,13 +136,13 @@ namespace CourseWork.ViewModel
                         foreach (User u in usr)
                         {
                             //passwordBoxContent = "";
-                            if (u.Password.ToString() == DataWorker.GetStringSha256Hash(passwordBoxContent))
+                            if ((u.Password.ToString() == DataWorker.GetStringSha256Hash(passwordBoxContent))&& u.Login.ToString() == LoginLabelContent.ToString())
                             {
                                 OpenMainWindowMethod();
                             }
                             else
                             {
-                                MessageBox.Show("Введён неверный пароль", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                                MessageBox.Show("Введён неверный логин или пароль", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                                 passwordBoxContent = null;
                             }
                         }
@@ -253,6 +264,16 @@ namespace CourseWork.ViewModel
             MainWindow.AllPackages.Items.Clear();
             MainWindow.AllPackages.ItemsSource = AllPackages;
             MainWindow.AllPackages.Items.Refresh();
+        }
+        private void UpdateAllAnalyzedIP()
+        {
+            AllAnalysisResults = PackageWorker.PackageAnalyzer(PackageWorker.GetAllUniquesIpMac(DataWorker.GetAllPackages()));
+            AllAnalysisResults.Distinct();
+            MainWindow.AllAnalysisResults.ItemsSource = null;
+            MainWindow.AllAnalysisResults.Items.Clear();
+            MainWindow.AllAnalysisResults.ItemsSource = AllAnalysisResults;
+
+
         }
     }
 }

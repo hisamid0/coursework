@@ -38,7 +38,7 @@
                 <TabItem.Header>
                     <TextBlock Text="Результат анализа"></TextBlock>
                 </TabItem.Header>
-                <ListView x:Name="ViewPackageAnalyze" ItemsSource="{Binding AllAnalysisResults}">
+                <ListView x:Name="ViewAllAnalysisResults" ItemsSource="{Binding AllAnalysisResults}">
                     <ListView.View>
                         <GridView>
                             <GridViewColumn DisplayMemberBinding="{Binding Path=Id}" Header="№"/>

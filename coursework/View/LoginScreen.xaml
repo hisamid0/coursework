@@ -11,6 +11,8 @@
         <StackPanel Margin="20">
             <Label Content="{Binding LoginLabelContent}"  FontSize="12" HorizontalAlignment="Center" ></Label>
             <Separator/>
+            <Label Content="Логин" />
+            <TextBox FontSize="18" Text="{Binding LoginTextBoxContent}"   />
             <Label Content="Пароль" />
             <components:BindablePasswordBox  FontSize="18" Password="{Binding PasswordBoxContent, Mode=TwoWay}" />
             <Separator/>
