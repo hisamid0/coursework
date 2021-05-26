@@ -51,6 +51,12 @@ namespace CourseWork.Model
                         string destinationPort = "";
                         string sourcePort = "";
                         var tcp = packet.Extract<PacketDotNet.TcpPacket>();
+                        var udp = packet.Extract<PacketDotNet.UdpPacket>();
+                        if(udp != null)
+                        {
+                            destinationPort = udp.DestinationPort.ToString();
+                            sourcePort = udp.SourcePort.ToString();
+                        }
                         if (tcp != null) 
                         {
                             destinationPort = tcp.DestinationPort.ToString();
@@ -124,7 +130,8 @@ namespace CourseWork.Model
             {
                 aRes.ThreatLevel = "5";                
             }
-            return analysisResults;   
+
+            return analysisResults.Distinct().ToList();   
 
         }
 
