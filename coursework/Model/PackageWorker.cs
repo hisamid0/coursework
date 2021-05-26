@@ -128,6 +128,13 @@ namespace CourseWork.Model
         {
             foreach (var aRes in analysisResults)
             {
+                if (aRes.IpAddress.ToString() == "0.0.0.0" && aRes.Protocol != "???")
+                {
+                    aRes.ThreatLevel = "3";
+                    aRes.NecessaryMeasures = "Необходимо внести временно правило в файрволл для блокирования подобных пакетов";
+
+                }
+
                 aRes.ThreatLevel = "5";                
             }
 

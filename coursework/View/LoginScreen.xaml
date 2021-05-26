@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CourseWork.View" xmlns:components="clr-namespace:CourseWork.Components" xmlns:viewmodel="clr-namespace:CourseWork.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:PackageManage}"
         mc:Ignorable="d"
-        Title="Вход в систему" Height="246" Width="300" Background="LightGray"
+        Title="Вход в систему" Height="297" Width="300" Background="LightGray"
         Name="LoginScreenWnd">
     <Border  CornerRadius="20" Margin="20,20,20,20" Background="DarkGray">
         <StackPanel Margin="20">

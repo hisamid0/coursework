@@ -136,7 +136,7 @@ namespace CourseWork.ViewModel
                         foreach (User u in usr)
                         {
                             //passwordBoxContent = "";
-                            if ((u.Password.ToString() == DataWorker.GetStringSha256Hash(passwordBoxContent))&& u.Login.ToString() == LoginLabelContent.ToString())
+                            if ((u.Password.ToString() == DataWorker.GetStringSha256Hash(passwordBoxContent))&& u.Login.ToString() == LoginTextBoxContent.ToString())
                             {
                                 OpenMainWindowMethod();
                             }

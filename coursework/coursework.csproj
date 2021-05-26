@@ -4,6 +4,7 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>net5.0-windows</TargetFramework>
     <UseWPF>true</UseWPF>
+    <ApplicationIcon>228-2288223_analysis-icons-png-download-data-analysis-icon-png.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
